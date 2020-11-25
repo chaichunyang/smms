@@ -8,14 +8,13 @@ UPLOAD_URL = f'{API_URL}upload'
 
 def upload(token, files):
     headers = {'user-agent': 'smms/0.0.1', 'Authorization': token}
-    # path = os.getcwd()
     for file in files:
-        realFile = file
-        # realFile = f'{path}/{file}'
-        with open(realFile, 'rb') as f:
+        real_file = file
+        with open(real_file, 'rb') as f:
             resp = requests.post(UPLOAD_URL, headers=headers, files={'smfile': f})
             f.close()
             result = resp.json()
+            
             # print(result)
             if result['success']:
                 print(result['data']['url'])
